@@ -25,6 +25,70 @@ public:
         delete doomed;
     }
 
+    void addAnywhere(int position, T* value) override {
+        Node<T>* fresh = new Node<T>(value);
+        Node<T>* current = head_;
+
+        if (position == 0) {
+            fresh->next = head_;
+            head_ = fresh;
+            return;
+        }
+
+        for (int i = 0; i < position - 1; i++) {
+            if (current != nullptr) {
+                current = current->next;
+            }
+            else {
+                std::cout << "Invalid position. Position must be [0," << i << "]" << std::endl;
+                return;
+            }
+        }
+        fresh->next = current->next;
+        current->next = fresh;
+    }
+
+    void deleteAnywhere(int position) override {
+        if (head_ == nullptr) {
+            std::cout << "LinkedList is empty" << std::endl;
+            return;
+        }
+        if (position == 0) {
+            Node<T>* doomed = head_;
+            head_ = head_->next;
+            delete doomed->data;
+            delete doomed;
+            return;
+        }
+        Node<T>* current = head_;
+        for (int i = 0; i < position - 1; i++) {
+            if (current != nullptr) {
+                current = current->next;
+            }
+            else {
+                std::cout << "Invalid position. Position must be [0," << i-1 << "]" << std::endl;
+                return;
+            }
+        }
+
+        if (current->next == nullptr) {
+            std::cout << "Cannot delete nullptr" << std::endl;
+            return;
+        }
+        Node<T>* doomed = current->next;
+        current->next = doomed->next;
+        delete doomed->data;
+        delete doomed;
+    }
+
+    void reverse() override {
+
+    }
+
+    void concat(List<T>* other) override {
+
+    }
+
     bool search(T* value) const override {
         Node<T>* current = head_;
         while (current != nullptr) {
@@ -56,4 +120,3 @@ private:
     Node<T>* head_;
 };
 
-// delete with head and without head

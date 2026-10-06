@@ -52,6 +52,22 @@ class ArrayList : public List<T> {
         std::cout << std::endl;
     }
 
+    void addAnywhere(int position, T* value) override {
+
+    }
+
+    void deleteAnywhere(int position) override {
+        
+    }
+
+    void reverse() override {
+
+    }
+
+    void concat(List<T>* other) override {
+
+    }
+
     ~ArrayList() override {
         for (int i = 0; i < size_; ++i) {
             delete data_[i];

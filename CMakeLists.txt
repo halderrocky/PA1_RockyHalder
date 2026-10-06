@@ -9,4 +9,5 @@ add_executable(pointers main.cpp
         Data.h
         LinkedList.h
         List.h
+        Player.h
 )

@@ -1,29 +1,34 @@
 #include <iostream>
 #include "List.h"
-#include "Data.h"
-
-// TIP To <b>Run</b> code, press <shortcut actionId="Run"/> or click the <icon src="AllIcons.Actions.Execute"/> icon in the gutter.
+#include "Player.h"
 
 int main() {
-    std::unique_ptr<List<int>> list = makeList<int>();
-    list->addFront(new int(10));
-    list->addFront(new int(20));
-    list->addFront(new int(30));
-    list->print();
+    // ---- Part 1: required test harness, do not modify ----
+    std::cout << "== List<int>: addAnywhere / deleteAnywhere / reverse =="
+              << std::endl;
+    std::unique_ptr<List<int>> nums = makeList<int>();
+    nums->addFront(new int(10));
+    nums->addFront(new int(20));
+    nums->addFront(new int(30));
+    nums->print();
+    nums->addAnywhere(1, new int(99));
+    nums->print();
+    nums->deleteAnywhere(2);
+    nums->print();
+    nums->reverse();
+    nums->print();
 
-    int key = 20;
-    std::cout << "search(20): " << (list->search(&key) ? "found" : "not found") << std::endl;
-    list->deleteFront();
-    list->print();
+    std::cout << std::endl << "== List<int>: concat ==" << std::endl;
+    std::unique_ptr<List<int>> more = makeList<int>();
+    more->addFront(new int(2));
+    more->addFront(new int(1));
+    more->print();
+    nums->concat(more.get());
+    nums->print();
+    more->print();
 
-    std::unique_ptr<List<Data>> roster = makeList<Data>();
-    roster->addFront(new Data(1, "Alice"));
-    roster->addFront(new Data(2, "Bilal"));
-    roster->addFront(new Data(3, "Chen"));
-    roster->print();
+    // ---- Part 2: your Uno scene goes below ----
 
-    Data query(2, " ");
-    std::cout << "search(id 2): " << (roster->search(&query) ? "found" : "not found") << std::endl;
 
     return 0;
 }
