@@ -10,4 +10,5 @@ add_executable(pointers main.cpp
         LinkedList.h
         List.h
         Player.h
+        Card.h
 )

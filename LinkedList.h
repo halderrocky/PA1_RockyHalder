@@ -82,11 +82,29 @@ public:
     }
 
     void reverse() override {
-
+        Node<T>* current = head_;
+        Node<T>* previous = nullptr;
+        while (current != nullptr) {
+            Node<T>* saved = current->next;
+            current->next = previous;
+            previous = current;
+            current = saved;
+        }
+        head_ = previous;
     }
 
     void concat(List<T>* other) override {
-
+        LinkedList<T>* otherList = dynamic_cast<LinkedList<T>* >(other);
+        if (otherList == nullptr) {
+            std::cout << "Error: List types don't match" << std::endl;
+            return;
+        }
+        Node<T>* current = head_;
+        while (current->next != nullptr) {
+            current = current->next;
+        }
+        current->next = otherList->head_;
+        otherList->head_ = nullptr;
     }
 
     bool search(T* value) const override {
